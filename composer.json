@@ -1,0 +1,23 @@
+{
+    "name": "tokoku/products",
+    "description": "",
+    "authors": [
+        {
+            "name": "Abdul Hafidz Anshari",
+            "email": "aditans88@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Tokoku\\Products": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
