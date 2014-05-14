@@ -1,6 +1,8 @@
 <?php namespace Tokoku\Products;
 
 use Illuminate\Support\ServiceProvider;
+use Tokoku\Products\Repositories\Eloquent\ProductRepository;
+use Tokoku\Products\Repositories\Eloquent\Product as Model;
 
 class ProductsServiceProvider extends ServiceProvider {
 
@@ -30,18 +32,41 @@ class ProductsServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{	
-		$app = $this->app;
-		
+		$this->registerProductRepository();
+		$this->registerProduct();
+		$this->bindInterface();
+	}
+
+
+	public function bindInterface()
+	{
+		$this->app->bind(
+            'Tokoku\Products\Repositories\ProductInterface',
+            'Tokoku\Products\Repositories\Eloquent\ProductRepository'
+            //'Tokoku\Products\Categories\CategoryInterface',
+            //'Tokoku\Products\Categories\Eloquent\Provider',
+        );
+	}
+
+	/**
+	 * Register the ProductInterface provider.
+	 *
+	 * @return void
+	 */
+	public function registerProductRepository()
+	{
+		$this->app['products.repository'] = $this->app->share(function($app){
+			return new ProductRepository(new Model);
+		});
+	}
+
+
+	public function registerProduct()
+	{
 		$this->app['product'] = $this->app->share(function($app)
 		{
-		    return new Product;
+		    return new Product($app['products.repository']);
 		});
-		
-		$app->bind(
-            'Tokoku\Products\Repositories\ProductRepositoryInterface',
-            'Tokoku\Products\Repositories\EloquentProductRepository'
-        );
-
 	}
 
 	/**

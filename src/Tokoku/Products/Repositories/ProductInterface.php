@@ -1,6 +1,6 @@
 <?php namespace Tokoku\Products\Repositories;
 
-interface ProductRepositoryInterface {
+interface ProductInterface {
 
     public function find($id);
     public function findOrFail($id);

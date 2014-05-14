@@ -4,7 +4,7 @@ use Illuminate\Container\Container;
 use Illuminate\Routing\Controller as Controller;
 use Illuminate\Support\Facades\Input;
 
-use Tokoku\Products\Repositories\ProductRepositoryInterface;
+use Tokoku\Products\Repositories\ProductInterface;
 
 class ProductsController extends Controller
 {
@@ -12,7 +12,7 @@ class ProductsController extends Controller
 	protected $product;
 
 	public function __construct(
-		ProductRepositoryInterface $product
+		ProductInterface $product
 	)
 	{
 		$this->product = $product;

@@ -1,23 +1,36 @@
 <?php namespace Tokoku\Products;
 
-use Tokoku\Products\Databases\Product as ProductModel;
+use Tokoku\Products\Repositories\ProductInterface;
 
-class Product extends ProductModel
+class Product
 {	
-	/**
-     * The table associated with the model.
-     *
-     * @var string
-     */
+	protected $product;
 
-	protected $table = 'product';
-	
+	public $responce = array();
 
-	/**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = array('id');
+	public function __construct(ProductInterface $products)
+	{	
+		$this->product = $products;		
+	}	
+
+	public function find($id)
+	{
+		$product = $this->product->find($id);
+		if($product){
+			$this->responce['status']	= true;
+			$this->responce['data']		= $product;		
+		}else{
+			$this->responce['message']	= 'Product Not Found!';
+			$this->responce['status']	= false;
+		}
+		
+		return $this->responce;
+	}
+
+	public function FunctionName($value='')
+	{
+		# code...
+	}
+
 
 }
