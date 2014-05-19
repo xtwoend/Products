@@ -45,7 +45,7 @@ class ProductProvider implements ProductRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create(Array $attributes)
+    public function createModel(Array $attributes)
     {
         $this->model = $this->model->newInstance($attributes);
 
@@ -59,7 +59,7 @@ class ProductProvider implements ProductRepositoryInterface
 
     public function findById($id)
     {
-        $model = $this->create($attributes = array());
+        $model = $this->getModel();
 
         $product = $model->find($id);
 
@@ -69,5 +69,25 @@ class ProductProvider implements ProductRepositoryInterface
         }
 
         return $product;
+    }
+
+
+    public function findBy(array $data)
+    {
+        $model = $this->getModel();
+
+        if(is_array($data)){
+
+            foreach ($data as $attribut => $value) {
+                $model = $model->where($attribut, '=', $value );
+            }
+        }
+
+        if(! $model->get()){
+            throw new ProductNotFoundException("A Products could not be found ");
+            
+        }
+
+        return $model->get();
     }
 }

@@ -58,7 +58,7 @@ class Product
 		return $this->productcategoryRepositoryRepository;
 	}	
 
-	public function get($id)
+	public function get($id = null)
 	{
 		if (null !== $this->product) {
             return $this->product;
@@ -74,6 +74,19 @@ class Product
         }
 
         return $this->product;
+	}
+
+	public function getBy(array $data)
+	{
+		try {
+			
+			$this->product = $this->productRepository->findBy($data);
+
+		} catch(Exception $e){
+			throw new Exception($e->getMessage());
+		}
+ 	
+ 		return $this->product;
 	}
 
 	public function productByCategory(array $attributs)

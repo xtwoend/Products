@@ -33,8 +33,10 @@ interface ProductRepositoryInterface
      * @return ProductInterface
      *
      */
-    public function create(Array $attributes);
+    public function createModel(Array $attributes);
 
 
     public function findById($id);
+
+    public function findBy(array $data);
 }
