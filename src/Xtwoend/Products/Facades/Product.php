@@ -1,10 +1,12 @@
-<?php namespace Tokoku\Products\Facades;
+<?php namespace Xtwoend\Products\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Product extends Facade {
 
-    /**
+class Product extends Facade
+{
+
+	/**
      * Get the registered name of the component.
      *
      * @return string

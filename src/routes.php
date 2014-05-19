@@ -1,9 +1,4 @@
 <?php
 
-/**
-* Route Products
-*
-*/
+//route products
 
-
-Route::resource('products', '\Tokoku\Products\Controllers\ProductsController');
